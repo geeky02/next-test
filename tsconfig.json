@@ -1,26 +1,22 @@
 {
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
-    "paths": {
-      "@/*": ["./src/*"]
-    }
+    "baseUrl": "./packages",
+    "composite": false,
+    /*
+     * We have a couple of issues that forces us to disable this -
+     *  1. apps-electron is still CJS
+     *  2. some of our packaged dependencies are problematic
+     *
+     * (also disabled in tsconfig.build.json)
+     */
+    "verbatimModuleSyntax": false
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "packages/**/src/**/*",
+    "scripts/*"
+  ],
+  "exclude": [
+    "**/node_modules/**/*"
+  ]
 }
